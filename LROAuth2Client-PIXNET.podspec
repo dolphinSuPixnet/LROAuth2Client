@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Classes/*.{h,m}'
   s.framework    =  'SystemConfiguration'
 
-  s.requires_arc = true
+  s.requires_arc = false
   
 # Pod Dependencies
 
