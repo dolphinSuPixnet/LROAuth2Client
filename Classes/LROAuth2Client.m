@@ -46,6 +46,7 @@
 - (void)dealloc;
 {
   [_networkQueue cancelAllOperations];
+    [super dealloc];
 }
 
 #pragma mark -
@@ -57,6 +58,8 @@
   [params setValue:@"web_server" forKey:@"type"];
   [params setValue:clientID forKey:@"client_id"];
   [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
+    //updated by dolphinSu
+    [params setValue:@"code" forKey:@"response_type"];
   
   if (additionalParameters) {
     for (NSString *key in additionalParameters) {
@@ -84,10 +87,14 @@
     [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
     [params setValue:accessCode forKey:@"code"];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:self.tokenURL];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:[[params stringWithFormEncodedComponents] dataUsingEncoding:NSUTF8StringEncoding]];
+      //updated by dolphinSu
+      NSURL *fullURL = [NSURL URLWithString:[[self.tokenURL absoluteString] stringByAppendingFormat:@"?%@", [params stringWithFormEncodedComponents]]];
+      NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:fullURL];
+      [request setHTTPMethod:@"GET"];
+
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    [request setHTTPBody:[[params stringWithFormEncodedComponents] dataUsingEncoding:NSUTF8StringEncoding]];
     
     LRURLRequestOperation *operation = [[LRURLRequestOperation alloc] initWithURLRequest:request];
 
@@ -109,13 +116,16 @@
   [params setValue:@"refresh_token" forKey:@"grant_type"];
   [params setValue:clientID forKey:@"client_id"];
   [params setValue:clientSecret forKey:@"client_secret"];
-  [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
+//  [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
   [params setValue:_accessToken.refreshToken forKey:@"refresh_token"];
   
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:self.tokenURL];
-  [request setHTTPMethod:@"POST"];
-  [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-  [request setHTTPBody:[[params stringWithFormEncodedComponents] dataUsingEncoding:NSUTF8StringEncoding]];
+    //updated by dolphinSu
+    NSURL *fullURL = [NSURL URLWithString:[[self.tokenURL absoluteString] stringByAppendingFormat:@"?%@", [params stringWithFormEncodedComponents]]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:fullURL];
+    [request setHTTPMethod:@"GET"];
+//  [request setHTTPMethod:@"POST"];
+//  [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//  [request setHTTPBody:[[params stringWithFormEncodedComponents] dataUsingEncoding:NSUTF8StringEncoding]];
   
   LRURLRequestOperation *operation = [[LRURLRequestOperation alloc] initWithURLRequest:request];
   
