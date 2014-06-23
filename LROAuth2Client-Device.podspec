@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = 'LROAuth2Client-Device'
+  s.name         = 'LROAuth2Client-PIXNET'
   s.version      = '0.2'
   s.license      =  {:type => 'BSD'}
   s.homepage     = 'https://github.com/dolphinSuPixnet/LROAuth2Client'
