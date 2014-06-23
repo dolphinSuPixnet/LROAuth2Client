@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version      = '0.2'
   s.license      =  {:type => 'BSD'}
   s.homepage     = 'https://github.com/dolphinSuPixnet/LROAuth2Client'
-  s.authors      =  'Dolphin Su' => 'dolphinsu@pixnet.tw'
+  s.authors      =  {'Dolphin Su' => 'dolphinsu@pixnet.tw'}
   s.summary      = 'updated from https://github.com/lukeredpath/LROAuth2Client'
 
 # Source Info
