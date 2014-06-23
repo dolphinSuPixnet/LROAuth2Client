@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		A3289DAD122D707B00D89A88 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F8C124119DEFD50035081C /* SystemConfiguration.framework */; };
 		A3289DAE122D707B00D89A88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F8C126119DEFDE0035081C /* UIKit.framework */; };
-		A3289DB2122D708700D89A88 /* LROAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8BFBB119DEE450035081C /* LROAuth2Client.m */; };
+		A3289DB2122D708700D89A88 /* LROAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8BFBB119DEE450035081C /* LROAuth2Client.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3289DB3122D708700D89A88 /* LROAuth2AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8BFBE119DEE450035081C /* LROAuth2AccessToken.m */; };
 		A3289EB9122D758F00D89A88 /* LROAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8BFBB119DEE450035081C /* LROAuth2Client.m */; };
 		A3289EBA122D758F00D89A88 /* LROAuth2AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8BFBE119DEE450035081C /* LROAuth2AccessToken.m */; };
