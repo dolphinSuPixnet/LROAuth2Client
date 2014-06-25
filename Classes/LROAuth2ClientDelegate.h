@@ -18,6 +18,6 @@
 
 @optional
 - (void)oauthClientDidReceiveAccessCode:(LROAuth2Client *)client;
-- (void)oauthClientDidCancel:(LROAuth2Client *)client;
+- (void)oauthClientDidCancel:(LROAuth2Client *)client request:(NSURLRequest *)request;
 
 @end

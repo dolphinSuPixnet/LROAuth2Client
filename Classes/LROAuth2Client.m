@@ -193,8 +193,8 @@
     NSString *queryString = [request.URL query];
     if ([[request.URL absoluteString] hasPrefix:[self.redirectURL absoluteString]]) {
         if ([queryString hasPrefix:@"error"]) {
-            if ([self.delegate respondsToSelector:@selector(oauthClientDidCancel:)]) {
-                [self.delegate oauthClientDidCancel:self];
+            if ([self.delegate respondsToSelector:@selector(oauthClientDidCancel:request:)]) {
+                [self.delegate oauthClientDidCancel:self request:request];
             }
         } else if ([queryString hasPrefix:@"code"]) {
             [self extractAccessCodeFromCallbackURL:request.URL];
@@ -237,8 +237,8 @@
     [self extractAccessCodeFromCallbackURL:[NSURL URLWithString:failingURLString]];
   } else if (self.cancelURL && [failingURLString hasPrefix:[self.cancelURL absoluteString]]) {
     [webView stopLoading];
-    if ([self.delegate respondsToSelector:@selector(oauthClientDidCancel:)]) {
-      [self.delegate oauthClientDidCancel:self];
+    if ([self.delegate respondsToSelector:@selector(oauthClientDidCancel:request:)]) {
+      [self.delegate oauthClientDidCancel:self request:webView.request];
     }
   }
   
