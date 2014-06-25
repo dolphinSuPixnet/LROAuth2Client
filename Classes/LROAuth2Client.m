@@ -190,23 +190,34 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {  
-  if ([[request.URL absoluteString] hasPrefix:[self.redirectURL absoluteString]]) {
-    [self extractAccessCodeFromCallbackURL:request.URL];
-
-    return NO;
-  } else if (self.cancelURL && [[request.URL absoluteString] hasPrefix:[self.cancelURL absoluteString]]) {
-    if ([self.delegate respondsToSelector:@selector(oauthClientDidCancel:)]) {
-      [self.delegate oauthClientDidCancel:self];
+    NSString *queryString = [request.URL query];
+    if ([[request.URL absoluteString] hasPrefix:[self.redirectURL absoluteString]]) {
+        if ([queryString hasPrefix:@"error"]) {
+            if ([self.delegate respondsToSelector:@selector(oauthClientDidCancel:)]) {
+                [self.delegate oauthClientDidCancel:self];
+            }
+        } else if ([queryString hasPrefix:@"code"]) {
+            [self extractAccessCodeFromCallbackURL:request.URL];
+        }
+        return NO;
+    }
+    /*
+     if ([[request.URL absoluteString] hasPrefix:[self.redirectURL absoluteString]]) {
+     [self extractAccessCodeFromCallbackURL:request.URL];
+     return NO;
+     } else if (self.cancelURL && [[request.URL absoluteString] hasPrefix:[self.cancelURL absoluteString]]) {
+     if ([self.delegate respondsToSelector:@selector(oauthClientDidCancel:)]) {
+     [self.delegate oauthClientDidCancel:self];
+     }
+     
+     return NO;
+     }
+     */
+    if ([self.delegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
+        return [self.delegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
     }
     
-    return NO;
-  }
-  
-  if ([self.delegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
-    return [self.delegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
-  }
-  
-  return YES;
+    return YES;
 }
 
 /**
