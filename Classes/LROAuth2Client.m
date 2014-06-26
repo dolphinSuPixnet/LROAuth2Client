@@ -110,7 +110,7 @@
 
 - (void)refreshAccessToken:(LROAuth2AccessToken *)_accessToken;
 {
-  accessToken = _accessToken;
+  self.accessToken = _accessToken;
   
   NSDictionary *params = [NSMutableDictionary dictionary];
   [params setValue:@"refresh_token" forKey:@"grant_type"];
