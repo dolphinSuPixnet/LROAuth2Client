@@ -85,7 +85,8 @@
 {
   if (self = [super init]) {
     authResponseData = [[aDecoder decodeObjectForKey:@"data"] copy];
-    expiresAt = [aDecoder decodeObjectForKey:@"expiresAt"];
+      [self extractExpiresAtFromResponse];
+//    expiresAt = [aDecoder decodeObjectForKey:@"expiresAt"];
   }
   return self;
 }
